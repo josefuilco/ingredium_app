@@ -11,7 +11,7 @@ export class CodeAuthenticationUseCase {
   async execute(code: string): Promise<string> {
     const userId = await this.codeRepository.findUserIdByCode(code);
     if (!userId) throw new CodeNotExistsError(code);
-    const token = this.tokenProvider.create<string>(userId);
+    const token = this.tokenProvider.create<string>(userId, 'access');
     await this.codeRepository.delete(code);
     return token;
   }

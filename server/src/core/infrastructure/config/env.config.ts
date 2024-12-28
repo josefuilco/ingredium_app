@@ -30,8 +30,14 @@ export const envs: EnviromentVariable = {
     development: enviromentVariable.POSTGRE_DEVELOPMENT
   },
   secret: {
-    access: enviromentVariable.ACCESS_SECRET,
-    refresh: enviromentVariable.REFRESH_SECRET
+    access: {
+      content: enviromentVariable.ACCESS_SECRET,
+      expiresIn: '4h'
+    },
+    refresh: {
+      content: enviromentVariable.REFRESH_SECRET,
+      expiresIn: '24h'
+    }
   },
   twilio: {
     accountSid: enviromentVariable.TWILIO_ACCOUNT_SID,

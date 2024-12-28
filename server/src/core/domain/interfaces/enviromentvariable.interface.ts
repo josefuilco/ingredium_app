@@ -9,8 +9,14 @@ export interface EnviromentVariable {
     development: boolean
   },
   secret: {
-    access: string,
-    refresh: string
+    access: {
+      content: string,
+      expiresIn: string,
+    },
+    refresh: {
+      content: string,
+      expiresIn: string,
+    }
   },
   twilio: {
     accountSid: string,
