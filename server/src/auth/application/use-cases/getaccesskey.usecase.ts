@@ -2,7 +2,7 @@ import { ITokenProvider } from "../../../core/domain/providers/token.provider";
 import { CodeNotExistsError } from "../../domain/errors/codenotexists.error";
 import { ICodeRepository } from "../../domain/repositories/code.repository";
 
-export class CodeAuthenticationUseCase {
+export class GetAccessKeyUseCase {
   constructor(
     private readonly codeRepository: ICodeRepository,
     private readonly tokenProvider: ITokenProvider

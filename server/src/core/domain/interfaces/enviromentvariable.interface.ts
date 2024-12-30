@@ -18,9 +18,5 @@ export interface EnviromentVariable {
       expiresIn: string,
     }
   },
-  twilio: {
-    accountSid: string,
-    authToken: string,
-    cellphone: string
-  }
+  resend: string;
 }

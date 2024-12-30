@@ -4,6 +4,7 @@ export class User {
     private readonly names: string,
     private readonly surnames: string,
     private readonly cellphone: string,
+    private readonly email: string,
     private readonly nacionality: string
   ) {}
 
@@ -21,6 +22,10 @@ export class User {
 
   getCellphone(): string {
     return this.cellphone;
+  }
+
+  getEmail(): string {
+    return this.email;
   }
 
   getNacionality(): string {

@@ -15,5 +15,13 @@ export const AppDataSource = new DataSource({
   poolSize: 20,
   entities: [entitiesDir],
   synchronize: postgre.development,
-  logging: postgre.development
+  logging: false
 });
+
+AppDataSource.initialize()
+  .then(() => {
+      console.log("Data Source has been initialized!")
+  })
+  .catch((err) => {
+      console.error("Error during Data Source initialization", err)
+  });

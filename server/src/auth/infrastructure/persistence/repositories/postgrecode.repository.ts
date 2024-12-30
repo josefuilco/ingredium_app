@@ -12,6 +12,10 @@ export class PostgreCodeRepository implements ICodeRepository {
       where: { userId },
       select: ['code']
     });
+
+    if (!codeFound)
+      return;
+
     return codeFound.code;
   }
 
@@ -20,6 +24,10 @@ export class PostgreCodeRepository implements ICodeRepository {
       where: { code },
       select: ['userId']
     });
+
+    if (!codeFound)
+      return;
+
     return codeFound.userId;
   }
 

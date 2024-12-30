@@ -17,12 +17,17 @@ export class PostgreUserRepository implements IUserRepository {
         isActive: true
       }
     });
+
+    if (!userFound)
+      return;
+
     const user = this.userBuilder
       .addId(userFound.id)
       .addNames(userFound.names)
       .addSurnames(userFound.surnames)
       .addCellphone(userFound.cellphone)
       .addNacionality(userFound.nacionality)
+      .addEmail(userFound.email)
       .build();
     return user;
   }
@@ -34,13 +39,42 @@ export class PostgreUserRepository implements IUserRepository {
         isActive: true
       }
     });
+
+    if (!userFound)
+      return;
+
     const user = this.userBuilder
       .addId(userFound.id)
       .addNames(userFound.names)
       .addSurnames(userFound.surnames)
       .addCellphone(userFound.cellphone)
       .addNacionality(userFound.nacionality)
+      .addEmail(userFound.email)
       .build();
+    
+    return user;
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    const userFound = await this.userEntity.findOne({
+      where: {
+        email,
+        isActive: true
+      }
+    });
+
+    if (!userFound)
+      return;
+
+    const user = this.userBuilder
+      .addId(userFound.id)
+      .addNames(userFound.names)
+      .addSurnames(userFound.surnames)
+      .addCellphone(userFound.cellphone)
+      .addNacionality(userFound.nacionality)
+      .addEmail(userFound.email)
+      .build();
+    
     return user;
   }
 
@@ -50,6 +84,7 @@ export class PostgreUserRepository implements IUserRepository {
       names: user.getNames(),
       surnames: user.getSurnames(),
       cellphone: user.getCellphone(),
+      email: user.getEmail(),
       nacionality: user.getNacionality()
     });
     return userCreated !== undefined;
@@ -62,6 +97,7 @@ export class PostgreUserRepository implements IUserRepository {
       names: user.getNames(),
       surnames: user.getSurnames(),
       cellphone: user.getCellphone(),
+      email: user.getEmail(),
       nacionality: user.getNacionality()
     });
     return userUpdated.affected > 0;

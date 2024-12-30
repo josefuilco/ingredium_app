@@ -5,6 +5,7 @@ export class UserBuilder {
   private names: string;
   private surnames: string;
   private cellphone: string;
+  private email: string;
   private nacionality: string;
 
   constructor() {
@@ -16,6 +17,7 @@ export class UserBuilder {
     this.names = '';
     this.surnames = '';
     this.cellphone = '';
+    this.email = '';
     this.nacionality = '';
   }
 
@@ -39,6 +41,11 @@ export class UserBuilder {
     return this;
   }
 
+  addEmail(email: string) {
+    this.email = email;
+    return this;
+  }
+
   addNacionality(nacionality: string) {
     this.nacionality = nacionality;
     return this;
@@ -50,6 +57,7 @@ export class UserBuilder {
       this.names,
       this.surnames,
       this.cellphone,
+      this.email,
       this.nacionality
     );
     this.reset();

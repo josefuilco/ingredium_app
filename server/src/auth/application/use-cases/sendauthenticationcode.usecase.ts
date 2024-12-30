@@ -1,28 +1,29 @@
 import { UserNotExistsError } from "../../domain/errors/usernotexists.error";
-import { ISmsProvider } from "../../domain/providers/sms.provider";
+import { IMessageProvider } from "../../domain/providers/message.provider";
 import { ICodeRepository } from "../../domain/repositories/code.repository";
 import { IUserRepository } from "../../domain/repositories/user.repository";
 
-export class UserAuthenticationUseCase {
+export class SendAuthenticationCodeUseCase {
   private static readonly pattern = 'ABCDEFGHIJKMNLOPQRSTUVWXYZ0123456789';
 
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly codeRepository: ICodeRepository,
-    private readonly smsProvider: ISmsProvider
+    private readonly messageProvider: IMessageProvider
   ) {}
 
-  async execute(cellphone: string): Promise<boolean> {
-    const user = await this.userRepository.findByCellphone(cellphone);
+  async execute(email: string): Promise<boolean> {
+    const user = await this.userRepository.findByEmail(email);
     if (!user) throw new UserNotExistsError();
 
     const code = await this.codeRepository.findByUserId(user.getId()) || await this.uniqueCode();
-    const [codeSavedSuccess, smsSentSuccess] = await Promise.all([
+
+    const [codeSavedSuccess, messageSentSuccess] = await Promise.all([
       this.codeRepository.save(code, user.getId()),
-      this.smsProvider.send(user.getCellphone(), code)
+      this.messageProvider.send(`${user.getNames()} ${user.getSurnames()}`, user.getEmail(), code)
     ]);
 
-    return smsSentSuccess && codeSavedSuccess;
+    return messageSentSuccess && codeSavedSuccess;
   }
 
   private async uniqueCode(): Promise<string> {
@@ -38,11 +39,11 @@ export class UserAuthenticationUseCase {
   }
 
   private generateCode(): string {
-    const patternLength = UserAuthenticationUseCase.pattern.length;
+    const patternLength = SendAuthenticationCodeUseCase.pattern.length;
     
     return Array.from(
-      { length: patternLength }, 
-      () => UserAuthenticationUseCase.pattern[Math.floor(Math.random() * patternLength)]
+      { length: 6 }, 
+      () => SendAuthenticationCodeUseCase.pattern[Math.floor(Math.random() * patternLength)]
     ).join('');
   }
 }

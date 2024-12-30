@@ -32,6 +32,14 @@ export class UserEntity {
 
   @Column({
     type: 'varchar',
+    length: 80,
+    unique: true,
+    nullable: false
+  })
+  email: string;
+
+  @Column({
+    type: 'varchar',
     length: 25,
     nullable: false
   })

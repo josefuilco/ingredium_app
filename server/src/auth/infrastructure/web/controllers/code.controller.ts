@@ -1,33 +1,33 @@
 import { Request, Response } from 'express';
-import { UserAuthenticationUseCase } from '../../../application/use-cases/userauthentication.usecase';
+import { SendAuthenticationCodeUseCase } from '../../../application/use-cases/sendauthenticationcode.usecase';
 import { userAuthenticationDto } from '../dtos/userauthentication.dto';
 import { codeAuthenticationDto } from '../dtos/codeauthentication.dto';
-import { CodeAuthenticationUseCase } from '../../../application/use-cases/codeauthentication.usecase';
+import { GetAccessKeyUseCase } from '../../../application/use-cases/getaccesskey.usecase';
 
 
 export class CodeController {
   constructor(
-    private readonly userAuthenticationUseCase: UserAuthenticationUseCase,
-    private readonly codeAuthenticationUseCase: CodeAuthenticationUseCase
+    private readonly sendAuthenticationCodeUseCase: SendAuthenticationCodeUseCase,
+    private readonly getAccessKeyUseCase: GetAccessKeyUseCase
   ) {}
 
-  async authenticateUser(
+  async sendCode(
     req: Request,
     res: Response
   ) {
     try {
-      const cellphone = (await userAuthenticationDto.parseAsync(req.body)).cellphone;
-      const isAuthenticated = await this.userAuthenticationUseCase.execute(cellphone);
-      if (!isAuthenticated) {
+      const email = (await userAuthenticationDto.parseAsync(req.body)).email;
+      const isSent = await this.sendAuthenticationCodeUseCase.execute(email);
+      if (!isSent) {
         res.status(500).json({
           message: 'Code not created.',
-          success: isAuthenticated
+          success: isSent
         });
         return;
       }
       res.status(200).json({
-        message: 'Cellphone number is correct.',
-        success: isAuthenticated
+        message: 'Code is sent with success by email.',
+        success: isSent
       });
     } catch (error) {
       if (error instanceof Error) res.status(400).json({
@@ -37,14 +37,14 @@ export class CodeController {
     }
   }
 
-  async authenticateCode(
+  async getAccessKey(
     req: Request,
     res: Response
   ) {
     try {
       const code = (await codeAuthenticationDto.parseAsync(req.params)).code;
-      const token = await this.codeAuthenticationUseCase.execute(code);
-      res.setHeader('Authorization', `Bearer ${token}`);
+      const accessKey = await this.getAccessKeyUseCase.execute(code);
+      res.setHeader('Authorization', `Bearer ${accessKey}`);
       res.status(200).json({
         message: 'Identity confirmed.',
         success: true

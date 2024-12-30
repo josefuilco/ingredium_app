@@ -12,9 +12,7 @@ const enviromentVariableDto = z.object({
   POSTGRE_DEVELOPMENT: z.coerce.boolean().default(false),
   ACCESS_SECRET: z.string().nonempty(),
   REFRESH_SECRET: z.string().nonempty(),
-  TWILIO_ACCOUNT_SID: z.string().nonempty(),
-  TWILIO_AUTH_TOKEN: z.string().nonempty(),
-  TWILIO_CELLPHONE: z.string().nonempty()
+  RESEND_API_KEY: z.string().nonempty()
 }).required();
 
 const enviromentVariable = enviromentVariableDto.parse(process.env);
@@ -39,9 +37,5 @@ export const envs: EnviromentVariable = {
       expiresIn: '24h'
     }
   },
-  twilio: {
-    accountSid: enviromentVariable.TWILIO_ACCOUNT_SID,
-    authToken: enviromentVariable.TWILIO_AUTH_TOKEN,
-    cellphone: enviromentVariable.TWILIO_CELLPHONE
-  }
+  resend: enviromentVariable.RESEND_API_KEY
 };
