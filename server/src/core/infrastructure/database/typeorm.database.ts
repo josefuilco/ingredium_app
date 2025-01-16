@@ -3,7 +3,7 @@ import path from 'path';
 import { envs } from '../config/env.config';
 
 const { postgre } = envs;
-const entitiesDir = path.join(__dirname, '../../../**/infrastructure/persistence/entities/*.entity.ts');
+const entitiesDir = path.join(__dirname, '../../../**/infrastructure/persistence/entities/*.entity.{js,ts}');
 
 export const AppDataSource = new DataSource({
   type: 'postgres',

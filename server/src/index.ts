@@ -5,13 +5,15 @@ import morgan from 'morgan';
 import { envs } from './core/infrastructure/config/env.config';
 import codeRoutes from './auth/infrastructure/web/routes/code.routes';
 import userRoutes from './auth/infrastructure/web/routes/user.routes';
+import ingredientRouter from './recipes/infrastructure/web/routes/ingredient.routes';
+import recipeRouter from './recipes/infrastructure/web/routes/recipe.routes';
 
 function bootstrap() {
   const app = express();
 
   // Configuration
   app.use(cors({
-    origin: '*',
+    origin: envs.frontend,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     exposedHeaders: ['Authorization']
@@ -23,8 +25,8 @@ function bootstrap() {
   // Routes
   app.use('/api/codes', codeRoutes);
   app.use('/api/users', userRoutes);
-  // app.use('/api/recipes');
-  // app.use('/api/posts');
+  app.use('/api/ingredients', ingredientRouter);
+  app.use('/api/recipes', recipeRouter);
 
   app.listen(
     envs.port,

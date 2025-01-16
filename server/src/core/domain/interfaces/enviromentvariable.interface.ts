@@ -1,5 +1,6 @@
 export interface EnviromentVariable {
   port: number,
+  frontend: string,
   postgre: {
     host: string,
     port: number,
@@ -19,4 +20,9 @@ export interface EnviromentVariable {
     }
   },
   resend: string;
+  cloudStorage: {
+    credential: string;
+    bucket: string;
+  },
+  huggingface: string;
 }

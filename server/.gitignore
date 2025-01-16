@@ -7,3 +7,6 @@ node_modules
 # Enviroment Variables
 .env
 .env.local
+
+# GCP Credentials
+gcp-cloud-storage.json
