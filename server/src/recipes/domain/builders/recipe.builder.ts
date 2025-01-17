@@ -8,6 +8,7 @@ export class RecipeBuilder {
   private purpose: string;
   private steps: string[];
   private ingredients: Ingredient[];
+  private ownerId: string;
   private userId: string;
 
   constructor() {
@@ -21,6 +22,7 @@ export class RecipeBuilder {
     this.purpose = '';
     this.steps = [];
     this.ingredients = [];
+    this.ownerId = '';
     this.userId = '';
   }
 
@@ -64,6 +66,11 @@ export class RecipeBuilder {
     return this;
   }
 
+  addOwnerId(ownerId: string) {
+    this.ownerId = ownerId;
+    return this;
+  }
+
   addUserId(userId: string) {
     this.userId = userId;
     return this;
@@ -77,6 +84,7 @@ export class RecipeBuilder {
       this.purpose,
       this.steps,
       this.ingredients,
+      this.ownerId,
       this.userId
     );
     this.reset();

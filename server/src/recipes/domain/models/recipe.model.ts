@@ -8,6 +8,7 @@ export class Recipe {
     private readonly purpose: string,
     private readonly steps: string[],
     private readonly ingredients: Ingredient[],
+    private readonly ownerId: string,
     private readonly userId: string
   ) {}
 
@@ -33,6 +34,10 @@ export class Recipe {
 
   getIngredientIds(): Ingredient[] {
     return this.ingredients;
+  }
+
+  getOwnerId(): string {
+    return this.ownerId;
   }
 
   getUserId(): string {
