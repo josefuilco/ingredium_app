@@ -1,5 +1,5 @@
 import { EnviromentVariable } from "../../domain/interfaces/enviromentvariable.interface";
-import { ITokenProvider } from "../../domain/providers/token.provider";
+import { ITokenProvider } from "../../domain/providers/token.provider.port";
 import jwt from 'jsonwebtoken';
 import { secretType } from "../../domain/types/secret.type";
 

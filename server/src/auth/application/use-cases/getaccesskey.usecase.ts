@@ -1,6 +1,6 @@
-import { ITokenProvider } from "../../../core/domain/providers/token.provider";
+import { ITokenProvider } from "../../../core/domain/providers/token.provider.port";
 import { CodeNotExistsError } from "../../domain/errors/codenotexists.error";
-import { ICodeRepository } from "../../domain/repositories/code.repository";
+import { ICodeRepository } from "../../domain/repositories/code.repository.port";
 
 export class GetAccessKeyUseCase {
   constructor(

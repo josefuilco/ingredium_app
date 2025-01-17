@@ -1,5 +1,5 @@
 import { envs } from "../../../core/infrastructure/config/env.config";
-import { AppDataSource } from "../../../core/infrastructure/database/typeorm.database";
+import { IngrediumDataSource } from "../../../core/infrastructure/database/typeorm.database";
 import { JwtTokenProvider } from "../../../core/infrastructure/providers/jwttoken.provider";
 import { GetAccessKeyUseCase } from "../../application/use-cases/getaccesskey.usecase";
 import { CreateUserUseCase } from "../../application/use-cases/createuser.usecase";
@@ -7,8 +7,8 @@ import { SendAuthenticationCodeUseCase } from "../../application/use-cases/senda
 import { UserBuilder } from "../../domain/builders/user.builder";
 import { CodeEntity } from "../persistence/entities/code.entity";
 import { UserEntity } from "../persistence/entities/user.entity";
-import { PostgreCodeRepository } from "../persistence/repositories/postgrecode.repository";
-import { PostgreUserRepository } from "../persistence/repositories/postgreuser.repository";
+import { CodeRepository } from "../persistence/repositories/code.repository";
+import { UserRepository } from "../persistence/repositories/user.repository";
 import { ResendMessageProvider } from "../providers/resendmessage.provider";
 import { CodeController } from "../web/controllers/code.controller";
 import { UserController } from "../web/controllers/user.controller";
@@ -24,12 +24,12 @@ const messageProvider = new ResendMessageProvider(envs);
 const tokenProvider = JwtTokenProvider.getInstance();
 
 // Repositories
-const userRepository = new PostgreUserRepository(
-  AppDataSource.getRepository(UserEntity),
+const userRepository = new UserRepository(
+  IngrediumDataSource.getRepository(UserEntity),
   userBuilder
 );
-const codeRepository = new PostgreCodeRepository(
-  AppDataSource.getRepository(CodeEntity)
+const codeRepository = new CodeRepository(
+  IngrediumDataSource.getRepository(CodeEntity)
 );
 
 // Use Cases

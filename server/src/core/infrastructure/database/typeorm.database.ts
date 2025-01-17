@@ -5,7 +5,7 @@ import { envs } from '../config/env.config';
 const { postgres } = envs;
 const entitiesDir = path.join(__dirname, '../../../**/infrastructure/persistence/entities/*.entity.{js,ts}');
 
-export const AppDataSource = new DataSource({
+export const IngrediumDataSource = new DataSource({
   type: 'postgres',
   host: postgres.host,
   port: postgres.port,
@@ -18,7 +18,7 @@ export const AppDataSource = new DataSource({
   logging: false
 });
 
-AppDataSource.initialize()
+IngrediumDataSource.initialize()
   .then(() => {
       console.log("Data Source has been initialized!")
   })

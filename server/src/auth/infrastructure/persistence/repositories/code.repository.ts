@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { CodeEntity } from "../entities/code.entity";
-import { ICodeRepository } from "../../../domain/repositories/code.repository";
+import { ICodeRepository } from "../../../domain/repositories/code.repository.port";
 
-export class PostgreCodeRepository implements ICodeRepository {
+export class CodeRepository implements ICodeRepository {
   constructor(
     private readonly codeEntity: Repository<CodeEntity>
   ) {}

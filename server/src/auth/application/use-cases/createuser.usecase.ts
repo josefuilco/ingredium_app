@@ -1,6 +1,6 @@
 import { UserExistsError } from "../../domain/errors/userexists.error";
 import { User } from "../../domain/models/user.model";
-import { IUserRepository } from "../../domain/repositories/user.repository";
+import { IUserRepository } from "../../domain/repositories/user.repository.port";
 
 export class CreateUserUseCase {
   constructor(

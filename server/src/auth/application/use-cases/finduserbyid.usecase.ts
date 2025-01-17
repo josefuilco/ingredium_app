@@ -1,5 +1,5 @@
 import { UserNotExistsError } from "../../domain/errors/usernotexists.error";
-import { IUserRepository } from "../../domain/repositories/user.repository";
+import { IUserRepository } from "../../domain/repositories/user.repository.port";
 import { UserInformationDto } from "../dtos/userinformation.dto";
 
 export class FindUserByIdUseCase {

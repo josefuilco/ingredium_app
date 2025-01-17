@@ -18,7 +18,7 @@ function bootstrap() {
     allowedHeaders: ['Authorization', 'Content-Type'],
     exposedHeaders: ['Authorization']
   }));
-  app.use(morgan('combined'));
+  app.use(morgan('common'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 

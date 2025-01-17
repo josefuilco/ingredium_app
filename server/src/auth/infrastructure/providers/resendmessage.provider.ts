@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { IMessageProvider } from '../../domain/providers/message.provider';
+import { IMessageProvider } from '../../domain/providers/message.provider.port';
 import { EnviromentVariable } from '../../../core/domain/interfaces/enviromentvariable.interface';
 
 export class ResendMessageProvider implements IMessageProvider {

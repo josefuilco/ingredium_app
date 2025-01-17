@@ -1,10 +1,10 @@
 import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
-import { IUserRepository } from '../../../domain/repositories/user.repository';
+import { IUserRepository } from '../../../domain/repositories/user.repository.port';
 import { User } from '../../../domain/models/user.model';
 import { UserBuilder } from '../../../domain/builders/user.builder';
 
-export class PostgreUserRepository implements IUserRepository {
+export class UserRepository implements IUserRepository {
   constructor(
     private readonly userEntity: Repository<UserEntity>,
     private readonly userBuilder: UserBuilder

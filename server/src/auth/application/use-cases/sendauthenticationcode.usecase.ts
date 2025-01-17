@@ -1,7 +1,7 @@
 import { UserNotExistsError } from "../../domain/errors/usernotexists.error";
-import { IMessageProvider } from "../../domain/providers/message.provider";
-import { ICodeRepository } from "../../domain/repositories/code.repository";
-import { IUserRepository } from "../../domain/repositories/user.repository";
+import { IMessageProvider } from "../../domain/providers/message.provider.port";
+import { ICodeRepository } from "../../domain/repositories/code.repository.port";
+import { IUserRepository } from "../../domain/repositories/user.repository.port";
 
 export class SendAuthenticationCodeUseCase {
   private static readonly pattern = 'ABCDEFGHIJKMNLOPQRSTUVWXYZ0123456789';
