@@ -6,12 +6,12 @@ import path from 'path';
 const enviromentVariableDto = z.object({
   PORT: z.coerce.number().int().default(3000),
   FRONTEND_ORIGIN: z.string().nonempty(),
-  POSTGRE_HOST: z.string().nonempty(),
-  POSTGRE_PORT: z.coerce.number().int().default(5432),
-  POSTGRE_USER: z.string().nonempty(),
-  POSTGRE_PASSWORD: z.string().nonempty(),
-  POSTGRE_DATABASE: z.string().nonempty(),
-  POSTGRE_DEVELOPMENT: z.coerce.boolean().default(false),
+  MYSQL_HOST: z.string().nonempty(),
+  MYSQL_PORT: z.coerce.number().int().default(5432),
+  MYSQL_USER: z.string().nonempty(),
+  MYSQL_PASSWORD: z.string().nonempty(),
+  MYSQL_DATABASE: z.string().nonempty(),
+  MYSQL_DEVELOPMENT: z.coerce.boolean().default(false),
   ACCESS_SECRET: z.string().nonempty(),
   REFRESH_SECRET: z.string().nonempty(),
   RESEND_API_KEY: z.string().nonempty(),
@@ -25,13 +25,13 @@ const enviromentVariable = enviromentVariableDto.parse(process.env);
 export const envs: EnviromentVariable = {
   port: enviromentVariable.PORT,
   frontend: enviromentVariable.FRONTEND_ORIGIN,
-  postgres: {
-    host: enviromentVariable.POSTGRE_HOST,
-    port: enviromentVariable.POSTGRE_PORT,
-    user: enviromentVariable.POSTGRE_USER,
-    password: enviromentVariable.POSTGRE_PASSWORD,
-    database: enviromentVariable.POSTGRE_DATABASE,
-    development: enviromentVariable.POSTGRE_DEVELOPMENT
+  mysql: {
+    host: enviromentVariable.MYSQL_HOST,
+    port: enviromentVariable.MYSQL_PORT,
+    user: enviromentVariable.MYSQL_USER,
+    password: enviromentVariable.MYSQL_PASSWORD,
+    database: enviromentVariable.MYSQL_DATABASE,
+    development: enviromentVariable.MYSQL_DEVELOPMENT
   },
   secret: {
     access: {

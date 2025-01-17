@@ -2,19 +2,19 @@ import { DataSource } from 'typeorm';
 import path from 'path';
 import { envs } from '../config/env.config';
 
-const { postgres } = envs;
+const { mysql } = envs;
 const entitiesDir = path.join(__dirname, '../../../**/infrastructure/persistence/entities/*.entity.{js,ts}');
 
 export const IngrediumDataSource = new DataSource({
-  type: 'postgres',
-  host: postgres.host,
-  port: postgres.port,
-  username: postgres.user,
-  password: postgres.password,
-  database: postgres.database,
+  type: 'mysql',
+  host: mysql.host,
+  port: mysql.port,
+  username: mysql.user,
+  password: mysql.password,
+  database: mysql.database,
   poolSize: 20,
   entities: [entitiesDir],
-  synchronize: postgres.development,
+  synchronize: mysql.development,
   logging: false
 });
 
