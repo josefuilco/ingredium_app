@@ -9,7 +9,9 @@ export class CodeEntity {
   code: string;
 
   @Column({
-    type: 'uuid',
+    name: 'user_id',
+    type: 'varchar',
+    length: 36,
     nullable: false,
     unique: true
   })

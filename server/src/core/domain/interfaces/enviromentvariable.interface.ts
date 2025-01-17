@@ -1,7 +1,7 @@
 export interface EnviromentVariable {
   port: number,
   frontend: string,
-  postgre: {
+  postgres: {
     host: string,
     port: number,
     user: string,

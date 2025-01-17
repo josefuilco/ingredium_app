@@ -5,7 +5,7 @@ import path from 'path';
 
 const enviromentVariableDto = z.object({
   PORT: z.coerce.number().int().default(3000),
-  FRONTEND_HOST: z.string().nonempty(),
+  FRONTEND_ORIGIN: z.string().nonempty(),
   POSTGRE_HOST: z.string().nonempty(),
   POSTGRE_PORT: z.coerce.number().int().default(5432),
   POSTGRE_USER: z.string().nonempty(),
@@ -24,8 +24,8 @@ const enviromentVariable = enviromentVariableDto.parse(process.env);
 
 export const envs: EnviromentVariable = {
   port: enviromentVariable.PORT,
-  frontend: enviromentVariable.FRONTEND_HOST,
-  postgre: {
+  frontend: enviromentVariable.FRONTEND_ORIGIN,
+  postgres: {
     host: enviromentVariable.POSTGRE_HOST,
     port: enviromentVariable.POSTGRE_PORT,
     user: enviromentVariable.POSTGRE_USER,

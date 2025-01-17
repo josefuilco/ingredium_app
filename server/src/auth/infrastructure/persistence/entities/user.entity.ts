@@ -46,6 +46,7 @@ export class UserEntity {
   nacionality: string;
 
   @Column({
+    name: 'is_active',
     type: 'boolean',
     default: true
   })

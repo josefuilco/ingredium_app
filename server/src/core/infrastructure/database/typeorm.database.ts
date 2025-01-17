@@ -2,19 +2,19 @@ import { DataSource } from 'typeorm';
 import path from 'path';
 import { envs } from '../config/env.config';
 
-const { postgre } = envs;
+const { postgres } = envs;
 const entitiesDir = path.join(__dirname, '../../../**/infrastructure/persistence/entities/*.entity.{js,ts}');
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  host: postgre.host,
-  port: postgre.port,
-  username: postgre.user,
-  password: postgre.password,
-  database: postgre.database,
+  host: postgres.host,
+  port: postgres.port,
+  username: postgres.user,
+  password: postgres.password,
+  database: postgres.database,
   poolSize: 20,
   entities: [entitiesDir],
-  synchronize: postgre.development,
+  synchronize: postgres.development,
   logging: false
 });
 
