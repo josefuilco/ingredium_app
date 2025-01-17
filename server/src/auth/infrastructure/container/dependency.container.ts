@@ -7,8 +7,8 @@ import { SendAuthenticationCodeUseCase } from "../../application/use-cases/senda
 import { UserBuilder } from "../../domain/builders/user.builder";
 import { CodeEntity } from "../persistence/entities/code.entity";
 import { UserEntity } from "../persistence/entities/user.entity";
-import { CodeRepository } from "../persistence/repositories/code.repository";
-import { UserRepository } from "../persistence/repositories/user.repository";
+import { DatabaseCodeRepository } from "../persistence/repositories/databasecode.repository";
+import { DatabaseUserRepository } from "../persistence/repositories/databaseuser.repository";
 import { ResendMessageProvider } from "../providers/resendmessage.provider";
 import { CodeController } from "../web/controllers/code.controller";
 import { UserController } from "../web/controllers/user.controller";
@@ -24,11 +24,11 @@ const messageProvider = new ResendMessageProvider(envs);
 const tokenProvider = JwtTokenProvider.getInstance();
 
 // Repositories
-const userRepository = new UserRepository(
+const userRepository = new DatabaseUserRepository(
   IngrediumDataSource.getRepository(UserEntity),
   userBuilder
 );
-const codeRepository = new CodeRepository(
+const codeRepository = new DatabaseCodeRepository(
   IngrediumDataSource.getRepository(CodeEntity)
 );
 

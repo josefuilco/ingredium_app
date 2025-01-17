@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { CodeEntity } from "../entities/code.entity";
 import { ICodeRepository } from "../../../domain/repositories/code.repository.port";
 
-export class CodeRepository implements ICodeRepository {
+export class DatabaseCodeRepository implements ICodeRepository {
   constructor(
     private readonly codeEntity: Repository<CodeEntity>
   ) {}

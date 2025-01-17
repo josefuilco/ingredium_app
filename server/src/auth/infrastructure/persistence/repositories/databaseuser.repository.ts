@@ -4,7 +4,7 @@ import { IUserRepository } from '../../../domain/repositories/user.repository.po
 import { User } from '../../../domain/models/user.model';
 import { UserBuilder } from '../../../domain/builders/user.builder';
 
-export class UserRepository implements IUserRepository {
+export class DatabaseUserRepository implements IUserRepository {
   constructor(
     private readonly userEntity: Repository<UserEntity>,
     private readonly userBuilder: UserBuilder
