@@ -1,5 +1,5 @@
 import { HfInference } from "@huggingface/inference";
-import { IAIProvider } from "../../domain/providers/ai.provider";
+import { IAIProvider } from "../../domain/providers/ai.provider.port";
 import { EnviromentVariable } from "../../../core/domain/interfaces/enviromentvariable.interface";
 
 export class HuggingfaceAIProvider implements IAIProvider {

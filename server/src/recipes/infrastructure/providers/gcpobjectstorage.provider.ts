@@ -1,5 +1,5 @@
 import { Bucket, Storage } from "@google-cloud/storage";
-import { IObjectStorageProvider } from "../../domain/providers/objectstorage.provider";
+import { IObjectStorageProvider } from "../../domain/providers/objectstorage.provider.port";
 import { EnviromentVariable } from "../../../core/domain/interfaces/enviromentvariable.interface";
 
 export class GCPObjectStorageProvider implements IObjectStorageProvider {
