@@ -2,11 +2,11 @@ import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import { envs } from './core/infrastructure/config/env.config';
-import codeRoutes from './auth/infrastructure/web/routes/code.routes';
-import userRoutes from './auth/infrastructure/web/routes/user.routes';
-import ingredientRouter from './recipes/infrastructure/web/routes/ingredient.routes';
-import recipeRouter from './recipes/infrastructure/web/routes/recipe.routes';
+import { envs } from './infrastructure/config/env.config';
+import codeRoutes from './presentation/routes/code.routes';
+import userRoutes from './presentation/routes/user.routes';
+import ingredientRouter from './presentation/routes/ingredient.routes';
+import recipeRouter from './presentation/routes/recipe.routes';
 
 function bootstrap() {
   const app = express();
