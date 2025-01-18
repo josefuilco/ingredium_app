@@ -1,6 +1,6 @@
-import { secretType } from "../../types";
+import { SecretType } from "../types/secret.type";
 
 export interface ITokenProvider {
-  create<T = any>(payload: T, secretType: secretType): string;
-  read<T = any>(token: string, secretType: secretType): T;
+  create<T = any>(payload: T, secretType: SecretType): string;
+  read<T = any>(token: string, secretType: SecretType): T;
 }

@@ -1,7 +1,7 @@
 import { EnviromentVariable } from "../../domain/interfaces/enviromentvariable.interface";
 import { ITokenProvider } from "../../domain/providers/token.provider.port";
 import jwt from 'jsonwebtoken';
-import { secretType } from "../../types";
+import { SecretType } from "../../domain/types/secret.type";
 
 export class JwtTokenProvider implements ITokenProvider {
   private static instance: JwtTokenProvider;
@@ -19,7 +19,7 @@ export class JwtTokenProvider implements ITokenProvider {
       this.enviromentVariable = enviromentVariable;
   }
 
-  create<T = any>(payload: T, secretType: secretType): string {
+  create<T = any>(payload: T, secretType: SecretType): string {
     let token: string;
     const { access, refresh } = this.enviromentVariable.secret;
     const secret = secretType === 'access' ? access : refresh;
@@ -31,7 +31,7 @@ export class JwtTokenProvider implements ITokenProvider {
 
     return token;
   }
-  read<T = any>(token: string, secretType: secretType): T {
+  read<T = any>(token: string, secretType: SecretType): T {
     const { access, refresh } = this.enviromentVariable.secret;
     const secret = secretType === 'access' ? access : refresh;
 
