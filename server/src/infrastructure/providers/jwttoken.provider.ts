@@ -1,7 +1,6 @@
 import { EnviromentVariable } from "../../domain/interfaces/enviromentvariable.interface";
 import { ITokenProvider } from "../../domain/providers/token.provider.port";
 import jwt from 'jsonwebtoken';
-import { secretType } from "../../domain/types/secret.type";
 
 export class JwtTokenProvider implements ITokenProvider {
   private static instance: JwtTokenProvider;

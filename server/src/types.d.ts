@@ -1,0 +1,1 @@
+type secretType = 'access' | 'refresh';
