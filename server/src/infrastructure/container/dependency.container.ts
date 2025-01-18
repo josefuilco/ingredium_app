@@ -1,10 +1,10 @@
-import { envs } from "../../../core/infrastructure/config/env.config";
-import { IngrediumDataSource } from "../../../core/infrastructure/database/typeorm.database";
-import { JwtTokenProvider } from "../../../core/infrastructure/providers/jwttoken.provider";
-import { GetAccessKeyUseCase } from "../../../application/use-cases/getaccesskey.usecase";
-import { CreateUserUseCase } from "../../../application/use-cases/createuser.usecase";
-import { SendAuthenticationCodeUseCase } from "../../../application/use-cases/sendauthenticationcode.usecase";
-import { UserBuilder } from "../../../domain/builders/user.builder";
+import { envs } from "../config/env.config"; 
+import { IngrediumDataSource } from "../database/typeorm.database"; 
+import { JwtTokenProvider } from "../providers/jwttoken.provider"; 
+import { GetAccessKeyUseCase } from "../../application/use-cases/getaccesskey.usecase"; 
+import { CreateUserUseCase } from "../../application/use-cases/createuser.usecase"; 
+import { SendAuthenticationCodeUseCase } from "../../application/use-cases/sendauthenticationcode.usecase";
+import { UserBuilder } from "../../domain/builders/user.builder";
 import { CodeEntity } from "../persistence/entities/code.entity";
 import { UserEntity } from "../persistence/entities/user.entity";
 import { DatabaseCodeRepository } from "../persistence/repositories/databasecode.repository";
@@ -12,9 +12,9 @@ import { DatabaseUserRepository } from "../persistence/repositories/databaseuser
 import { ResendMessageProvider } from "../providers/resendmessage.provider";
 import { CodeController } from "../../presentation/controllers/code.controller";
 import { UserController } from "../../presentation/controllers/user.controller";
-import { FindUserByIdUseCase } from "../../../application/use-cases/finduserbyid.usecase";
-import { UpdateUserUseCase } from "../../../application/use-cases/updateuser.usecase";
-import { DeleteUserUseCase } from "../../../application/use-cases/deleteuser.usecase";
+import { FindUserByIdUseCase } from "../../application/use-cases/finduserbyid.usecase";
+import { UpdateUserUseCase } from "../../application/use-cases/updateuser.usecase";
+import { DeleteUserUseCase } from "../../application/use-cases/deleteuser.usecase";
 
 // Builders
 const userBuilder = new UserBuilder();

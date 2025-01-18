@@ -1,1 +1,1 @@
-type secretType = 'access' | 'refresh';
+export type secretType = 'access' | 'refresh';

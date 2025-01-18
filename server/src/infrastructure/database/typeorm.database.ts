@@ -12,10 +12,9 @@ export const IngrediumDataSource = new DataSource({
   username: mysql.user,
   password: mysql.password,
   database: mysql.database,
-  poolSize: 20,
   entities: [entitiesDir],
   synchronize: mysql.development,
-  logging: false
+  logging: mysql.development
 });
 
 IngrediumDataSource.initialize()
