@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import { envs } from './infrastructure/config/env.config';
 import codeRoutes from './presentation/routes/code.routes';
 import userRoutes from './presentation/routes/user.routes';
-import ingredientRouter from './presentation/routes/ingredient.routes';
+import ingredientRoutes from './presentation/routes/ingredient.routes';
 import recipeRouter from './presentation/routes/recipe.routes';
 
 function bootstrap() {
@@ -25,7 +25,7 @@ function bootstrap() {
   // Routes
   app.use('/api/codes', codeRoutes);
   app.use('/api/users', userRoutes);
-  app.use('/api/ingredients', ingredientRouter);
+  app.use('/api/ingredients', ingredientRoutes);
   app.use('/api/recipes', recipeRouter);
 
   app.listen(

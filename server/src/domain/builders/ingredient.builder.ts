@@ -1,10 +1,9 @@
 import { Ingredient } from "../models/ingredient.model";
 
 export class IngredientBuilder {
-  private id: string;
+  private id: number;
   private name: string;
   private description: string;
-  private quantity: number;
   private calories: number;
 
   constructor() {
@@ -12,14 +11,13 @@ export class IngredientBuilder {
   }
 
   reset() {
-    this.id = '';
+    this.id = 0;
     this.name = '';
     this.description = '';
-    this.quantity = 0;
     this.calories = 0;
   }
 
-  addId(id: string) {
+  addId(id: number) {
     this.id = id;
     return this;
   }
@@ -34,11 +32,6 @@ export class IngredientBuilder {
     return this;
   }
 
-  addQuantity(quantity: number) {
-    this.quantity = quantity;
-    return this;
-  }
-
   addCalories(calories: number) {
     this.calories = calories;
     return this;
@@ -49,7 +42,6 @@ export class IngredientBuilder {
       this.id,
       this.name,
       this.description,
-      this.quantity,
       this.calories
     );
     this.reset();

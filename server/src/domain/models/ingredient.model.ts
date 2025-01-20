@@ -1,13 +1,12 @@
 export class Ingredient {
   constructor(
-    private readonly id: string,
+    private readonly id: number,
     private readonly name: string,
     private readonly description: string,
-    private readonly quantity: number,
     private readonly calories: number
   ) {}
 
-  getId(): string {
+  getId(): number {
     return this.id;
   }
 
@@ -17,10 +16,6 @@ export class Ingredient {
 
   getDescription(): string {
     return this.description;
-  }
-
-  getQuantity(): number {
-    return this.quantity;
   }
 
   getCalories(): number {

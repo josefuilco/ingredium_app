@@ -32,7 +32,7 @@ export class Recipe {
     return this.steps;
   }
 
-  getIngredientIds(): Ingredient[] {
+  getIngredients(): Ingredient[] {
     return this.ingredients;
   }
 

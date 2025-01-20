@@ -11,8 +11,13 @@ export class HuggingfaceAIProvider implements IAIProvider {
 
   async generateText(prompt: string): Promise<string> {
     const response = await this.hf.textGeneration({
-      model: 'gpt-3.5-turbo',
-      inputs: prompt
+      model: 'EleutherAI/gpt-neo-2.7B',
+      inputs: prompt,
+      parameters: {
+      max_length: 100,
+      temperature: 0.7,
+      top_p: 0.9
+      }
     });
     return response.generated_text;
   }

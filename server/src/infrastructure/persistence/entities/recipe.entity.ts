@@ -19,6 +19,18 @@ export class RecipeEntity {
   name: string;
 
   @Column({
+    type: 'varchar',
+    length: 50
+  })
+  description: string;
+
+  @Column({
+    type: 'varchar',
+    length: 50
+  })
+  purpose: string;
+
+  @Column({
     name: 'owner_id',
     type: 'varchar',
     length: 36
