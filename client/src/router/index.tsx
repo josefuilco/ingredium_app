@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import SignInPage from '../modules/auth/pages/SignInPage';
 import SignUpPage from '../modules/auth/pages/SingUpPage';
+import CommunityPage from '../modules/recipes/pages/CommunityPage';
 
 export const Router = createBrowserRouter([
   {
@@ -13,15 +14,19 @@ export const Router = createBrowserRouter([
   },
   {
     path: '/community',
+    element: <CommunityPage />
   },
   {
-    path: '/community/:id',
+    path: '/profile/',
   },
   {
     path: '/profile/:id',
   },
   {
-    path: '/profile/:id/edit',
+    path: '/recipes/',
   },
+  {
+    path: '/recipes/:id',
+  }
   
 ]);

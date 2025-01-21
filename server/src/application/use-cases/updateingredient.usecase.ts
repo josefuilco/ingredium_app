@@ -5,7 +5,7 @@ export class UpdateIngredientUseCase {
   constructor(private readonly ingredientRepository: IIngredientRepository) {}
 
   async execute(ingredient: Ingredient): Promise<boolean> {
-    const currentIngredient = await this.ingredientRepository.findByName(ingredient.getName());
+    const currentIngredient = await this.ingredientRepository.findById(ingredient.getId());
 
     if (!currentIngredient) {
       throw new Error('Ingredient not found');

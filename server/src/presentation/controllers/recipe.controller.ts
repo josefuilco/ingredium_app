@@ -44,7 +44,7 @@ export class RecipeController {
         .addOwnerId(result.data.ownerId)
         .build();
 
-      const imageUrl = await this.createRecipeUseCase.execute(recipe, req.file.buffer);
+      const imageUrl = await this.createRecipeUseCase.execute(recipe, req.file?.buffer);
       res.status(201).json({
         success: true,
         message: 'Recipe created',

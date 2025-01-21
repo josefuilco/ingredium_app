@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        mint: {
-          normal: '#27CFB1',
-          hover: '#1FA68E'
+        orange: {
+          normal: '#FC9057',
+          hover: '#CA7346'
         }
       }
     },

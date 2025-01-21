@@ -10,8 +10,25 @@ export class DatabaseIngredientRepository implements IIngredientRepository {
     private readonly ingredientBuilder: IngredientBuilder
   ) {}
 
+  async findById(id: number): Promise<Ingredient> {
+    const ingredient = await this.ingredientEntity.findOne({
+      where: { id }
+    });
+
+    return this.ingredientBuilder
+      .addId(ingredient.id)
+      .addName(ingredient.name)
+      .addDescription(ingredient.description)
+      .addCalories(ingredient.calories)
+      .build();
+  }
+
   async getAll(): Promise<Ingredient[]> {
-    const ingredients = await this.ingredientEntity.find();
+    const ingredients = await this.ingredientEntity.find({
+      where: {
+        isActive: true
+      }
+    });
     return ingredients.map(entity => this.ingredientBuilder
       .addId(entity.id)
       .addName(entity.name)
@@ -47,12 +64,15 @@ export class DatabaseIngredientRepository implements IIngredientRepository {
 
   async update(ingredient: Ingredient): Promise<boolean> {
     const result = await this.ingredientEntity.update(
-      { name: ingredient.getName() },
+      { id: ingredient.getId() },
       {
+        name: ingredient.getName(),
         description: ingredient.getDescription(),
-        calories: ingredient.getCalories()
+        calories: ingredient.getCalories(),
+        isActive: true
       }
     );
+
     return result.affected > 0;
   }
 

@@ -9,7 +9,7 @@ interface ActionButtonProps {
 
 function ActionButton({ label, type, onClick }: ActionButtonProps) {
   return (
-    <Button className='h-[40px] bg-mint-normal hover:bg-mint-hover hover: border-none focus:shadow-none' label={label} onClick={onClick} type={type} />
+    <Button className='h-[40px] bg-orange-normal hover:bg-orange-hover hover: border-none focus:shadow-none' label={label} onClick={onClick} type={type} />
   );
 }
 

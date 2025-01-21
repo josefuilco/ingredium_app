@@ -5,14 +5,13 @@ import { useAuthorization } from '../middlewares/authorization.middleware';
 const controller = dependencyManager.ingredientController;
 const ingredientRoutes = Router();
 
-// Get all ingredients
+// GET /api/ingredients
 ingredientRoutes.get(
   '/',
-  useAuthorization,
   (req, res) => controller.findAll(req, res)
 );
 
-// Create a new ingredient
+// POST /api/ingredients
 ingredientRoutes.post(
   '/',
   useAuthorization,
@@ -28,7 +27,7 @@ ingredientRoutes.put(
 
 // Delete an ingredient by ID
 ingredientRoutes.delete(
-  '/:name',
+  '/:id',
   useAuthorization,
   (req, res) => controller.delete(req, res)
 );

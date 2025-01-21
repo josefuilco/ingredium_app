@@ -5,8 +5,8 @@ export class DeleteIngredientUseCase {
     private readonly ingredientRepository: IIngredientRepository
   ) {}
 
-  async execute(name: string): Promise<boolean> {
-    const ingredient = await this.ingredientRepository.findByName(name);
+  async execute(id: number): Promise<boolean> {
+    const ingredient = await this.ingredientRepository.findById(id);
 
     if (!ingredient) {
       throw new Error('Ingredient not found');

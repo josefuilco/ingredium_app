@@ -3,9 +3,10 @@ import { CreateIngredientUseCase } from '../../application/use-cases/createingre
 import { GetAllIngredientsUseCase } from '../../application/use-cases/getallingredients.usecase'; 
 import { UpdateIngredientUseCase } from '../../application/use-cases/updateingredient.usecase'; 
 import { DeleteIngredientUseCase } from '../../application/use-cases/deleteingredient.usecase'; 
-import { ingredientDto } from '../dtos/ingredient.dto';
+import { createIngredientDto } from '../dtos/createingredient.dto';
 import { IngredientBuilder } from '../../domain/builders/ingredient.builder';
-import { ingredientNameDto } from '../dtos/ingredientName.dto';
+import { updateIngredientDto } from '../dtos/updateingredient.dto';
+import { deleteIngredientDto } from '../dtos/deleteingredient.dto';
 
 export class IngredientController {
   constructor(
@@ -18,7 +19,7 @@ export class IngredientController {
 
   async create(req: Request, res: Response) {
     try {
-      const result = await ingredientDto.safeParseAsync(req.body);
+      const result = await createIngredientDto.safeParseAsync(req.body);
 
       if (!result.success) {
         res.status(400).json(result.error.issues);
@@ -26,7 +27,6 @@ export class IngredientController {
       }
 
       const ingredient = this.ingredientBuilder
-        .addId(result.data.id)
         .addName(result.data.name)
         .addDescription(result.data.description)
         .addCalories(result.data.calories)
@@ -62,7 +62,7 @@ export class IngredientController {
 
   async update(req: Request, res: Response) {
     try {
-      const result = await ingredientDto.safeParseAsync(req.body);
+      const result = await updateIngredientDto.safeParseAsync(req.body);
 
       if (!result.success) {
         res.status(400).json(result.error.issues);
@@ -77,6 +77,7 @@ export class IngredientController {
         .build();
 
       const updated = await this.updateIngredientUseCase.execute(ingredient);
+
       res.status(200).json({
         message: updated ? 'Ingredient updated' : 'Ingredient not found',
         success: updated
@@ -91,9 +92,9 @@ export class IngredientController {
 
   async delete(req: Request, res: Response) {
     try {
-      const { name } = await ingredientNameDto.parseAsync(req.params);
-      const isDeleted = await this.deleteIngredientUseCase.execute(name);
-      res.status(204).json({
+      const { id } = await deleteIngredientDto.parseAsync(req.params);
+      const isDeleted = await this.deleteIngredientUseCase.execute(id);
+      res.status(200).json({
         success: isDeleted,
         message: isDeleted ? 'Ingredient deleted' : 'Ingredient not found',
       });

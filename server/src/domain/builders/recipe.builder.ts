@@ -9,7 +9,7 @@ export class RecipeBuilder {
   private steps: string[];
   private ingredients: Ingredient[];
   private ownerId: string;
-  private userId: string;
+  private usersId: string[];
 
   constructor() {
     this.reset();
@@ -23,7 +23,7 @@ export class RecipeBuilder {
     this.steps = [];
     this.ingredients = [];
     this.ownerId = '';
-    this.userId = '';
+    this.usersId = [];
   }
 
   addId(id: string) {
@@ -71,8 +71,8 @@ export class RecipeBuilder {
     return this;
   }
 
-  addUserId(userId: string) {
-    this.userId = userId;
+  addUserId(userId: string[]) {
+    this.usersId = userId;
     return this;
   }
 
@@ -85,7 +85,7 @@ export class RecipeBuilder {
       this.steps,
       this.ingredients,
       this.ownerId,
-      this.userId
+      this.usersId
     );
     this.reset();
     return recipe;

@@ -10,6 +10,7 @@ export class CreateIngredientUseCase {
     const existingIngredient = await this.ingredientRepository.findByName(ingredient.getName());
 
     if (existingIngredient) {
+      await this.ingredientRepository.update(existingIngredient);
       return false;
     }
 

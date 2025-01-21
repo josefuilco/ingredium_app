@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import ActionButton from "../../shared/components/ActionButton";
 import TextField from "../../shared/components/TextField";
 import CodeDialog from "./CodeDialog";
-import Logotype from "./Logotype";
+import Logotype from "../../shared/components/Logotype";
 import { useState } from "react";
 import { SendCodeService } from "../services/SendCodeService";
 

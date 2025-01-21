@@ -7,7 +7,8 @@ export class IngredientEntity {
 
   @Column({
     type: 'varchar',
-    length: 50
+    length: 50,
+    unique: true
   })
   name: string;
 
