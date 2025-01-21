@@ -9,6 +9,7 @@ import { DeleteRecipeUseCase } from '../../application/use-cases/deleterecipe.us
 import { RecipeBuilder } from '../../domain/builders/recipe.builder';
 import { recipeDto } from '../dtos/recipe.dto'; 
 import { IngredientBuilder } from '../../domain/builders/ingredient.builder';
+import { UserRequest } from '../requests/user.request';
 
 export class RecipeController {
   constructor(
@@ -70,6 +71,22 @@ export class RecipeController {
       res.status(500).json({
         success: false,
         message: 'An error occurred while fetching the recipe',
+      });
+    }
+  }
+
+  async findByUser(req: UserRequest, res: Response): Promise<void> {
+    try {
+      const userId = req.userId;
+      const recipes = await this.findRecipeByUserIdUseCase.execute(userId);
+      res.status(200).json({
+        success: true,
+        data: recipes,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: 'An error occurred while fetching recipes',
       });
     }
   }

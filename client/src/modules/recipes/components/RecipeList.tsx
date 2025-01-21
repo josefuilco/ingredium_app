@@ -1,6 +1,6 @@
 import React from 'react';
 import RecipeCard from './RecipeCard';
-import { Recipe } from '../models/recipe';
+import { Recipe } from '../models/Recipe';
 
 interface RecipeListProps {
   recipes: Recipe[];

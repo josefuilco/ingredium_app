@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../../shared/components/Navbar'; 
 import RecipeList from '../components/RecipeList';
 import { RecipeServices } from '../services/RecipeServices';
-import { Recipe } from '../models/recipe';
+import { Recipe } from '../models/Recipe';
 
 const recipeServices = new RecipeServices();
 

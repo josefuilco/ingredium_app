@@ -2,6 +2,7 @@ import { Router } from 'express';
 import multer from 'multer';
 import { dependencyManager } from '../../infrastructure/container/dependency.container';
 import { useAuthorization } from '../middlewares/authorization.middleware'; 
+import { UserRequest } from '../requests/user.request';
 
 const controller = dependencyManager.recipeController;
 const recipeRouter = Router();
@@ -15,6 +16,8 @@ recipeRouter.put('/:id', useAuthorization, upload.single('image'), (req, res) =>
 recipeRouter.delete('/:id', useAuthorization, (req, res) => controller.delete(req, res));
 // GET /api/recipes/:id
 recipeRouter.get('/:id', (req, res) => controller.findById(req, res));
+// GET /api/recipes/user
+recipeRouter.get('/user/', useAuthorization, (req: UserRequest, res) => controller.findByUser(req, res));
 // GET /api/recipes/user/:userId
 recipeRouter.get('/user/:userId', (req, res) => controller.findByUserId(req, res));
 // GET /api/recipes/title/:title

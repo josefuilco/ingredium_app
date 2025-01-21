@@ -9,4 +9,6 @@ export interface Recipe {
   ingredients: Ingredient[];
   ownerId: string;
   userId: string;
+  urlImage?: string;
+  aiComment?: string;
 }

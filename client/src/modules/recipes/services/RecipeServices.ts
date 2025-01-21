@@ -1,4 +1,4 @@
-import { Recipe } from "../models/recipe";
+import { Recipe } from "../models/Recipe";
 
 export class RecipeServices {
   private static recipes: Recipe[] = [
@@ -144,9 +144,12 @@ export class RecipeServices {
       const base64Image = reader.result as string;
       const newRecipe = { ...recipe, image: base64Image };
       RecipeServices.recipes.push(newRecipe);
+      
       console.log('Recipe created:', newRecipe);
     };
     reader.readAsDataURL(image);
+
+    
   }
 
   async updateRecipe(recipe: Recipe, image: File) {
@@ -181,6 +184,17 @@ export class RecipeServices {
     } else {
       console.log('Recipe not found');
       return null;
+    }
+  }
+
+  async getMyRecipes() {
+    const userRecipes = RecipeServices.recipes.filter(r => r.userId === 'user2');
+    if (userRecipes.length > 0) {
+      console.log('Recipes found for user:', userRecipes);
+      return userRecipes;
+    } else {
+      console.log('No recipes found for user');
+      return [];
     }
   }
 
