@@ -3,7 +3,6 @@ import { CreateUserUseCase } from "../../application/use-cases/createuser.usecas
 import { UserBuilder } from "../../domain/builders/user.builder";
 import { userDto } from "../dtos/user.dto";
 import { FindUserByIdUseCase } from "../../application/use-cases/finduserbyid.usecase";
-import { userIdDto } from "../dtos/userid.dto";
 import { UpdateUserUseCase } from "../../application/use-cases/updateuser.usecase";
 import { DeleteUserUseCase } from "../../application/use-cases/deleteuser.usecase";
 import { UserRequest } from "../requests/user.request";
@@ -109,11 +108,11 @@ export class UserController {
   }
 
   async deleteUser(
-    req: Request,
+    req: UserRequest,
     res: Response
   ) {
     try {
-      const userId = (await userIdDto.parseAsync(req.params)).id;
+      const userId = req.userId;
       const isRemoved = await this.deleteUserUseCase.execute(userId);
 
       if (!isRemoved) {

@@ -20,6 +20,7 @@ export class GetRecipesByRangeUseCase {
         id: recipe.getId(),
         title: recipe.getTitle(),
         description: recipe.getDescription(),
+        purpose: recipe.getPurpose(),
         ingredients: recipe.getIngredients(),
         steps: recipe.getSteps(),
         urlImage: await this.objectStorageProvider.getFileUrl(`${recipe.getOwnerId()}/${recipe.getTitle()}`)

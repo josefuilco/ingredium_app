@@ -11,7 +11,7 @@ export class HuggingfaceAIProvider implements IAIProvider {
 
   async generateText(prompt: string): Promise<string> {
     const response = await this.hf.textGeneration({
-      model: 'EleutherAI/gpt-neo-2.7B',
+      model: 'Qwen/Qwen2.5-Coder-32B-Instruct',
       inputs: prompt,
       parameters: {
       max_length: 100,
@@ -19,7 +19,8 @@ export class HuggingfaceAIProvider implements IAIProvider {
       top_p: 0.9
       }
     });
-    return response.generated_text;
+    const cleanResponse = response.generated_text.replace(prompt, '').trim();
+    return cleanResponse;
   }
 
   async generateImage(prompt: string): Promise<Buffer> {

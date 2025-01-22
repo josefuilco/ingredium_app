@@ -24,9 +24,9 @@ export class RecipeController {
     private readonly deleteRecipeUseCase: DeleteRecipeUseCase
   ) {}
 
-  async create(req: Request, res: Response): Promise<void> {
+  async create(req: UserRequest, res: Response): Promise<void> {
     try {
-      const result = await recipeDto.safeParseAsync(req.body);
+      const result = await recipeDto.safeParseAsync(JSON.parse(req.body.recipe));
 
       if (!result.success) {
         res.status(400).json(result.error.issues);
@@ -34,6 +34,7 @@ export class RecipeController {
       }
 
       const recipe = this.recipeBuilder
+        .addId(result.data.id)
         .addTitle(result.data.title)
         .addDescription(result.data.description)
         .addPurpose(result.data.purpose)
@@ -42,8 +43,10 @@ export class RecipeController {
           const recipe = this.ingredientBuilder.addId(ingredient).build();
           return recipe;
         }))
-        .addOwnerId(result.data.ownerId)
+        .addOwnerId(req.userId)
         .build();
+
+      console.log(recipe);
 
       const imageUrl = await this.createRecipeUseCase.execute(recipe, req.file?.buffer);
       res.status(201).json({
@@ -78,6 +81,7 @@ export class RecipeController {
   async findByUser(req: UserRequest, res: Response): Promise<void> {
     try {
       const userId = req.userId;
+      console.log('User ID:', userId);
       const recipes = await this.findRecipeByUserIdUseCase.execute(userId);
       res.status(200).json({
         success: true,
@@ -139,9 +143,9 @@ export class RecipeController {
     }
   }
 
-  async update(req: Request, res: Response): Promise<void> {
+  async update(req: UserRequest, res: Response): Promise<void> {
     try {
-      const result = await recipeDto.safeParseAsync(req.body);
+      const result = await recipeDto.safeParseAsync(JSON.parse(req.body.recipe));
 
       if (!result.success) {
         res.status(400).json(result.error.issues);
@@ -158,7 +162,7 @@ export class RecipeController {
           const recipe = this.ingredientBuilder.addId(ingredient).build();
           return recipe;
         }))
-        .addOwnerId(result.data.ownerId)
+        .addOwnerId(req.userId)
         .build();
 
       const updated = await this.updateRecipeUseCase.execute(recipe);

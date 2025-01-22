@@ -4,6 +4,7 @@ import { IRecipeRepository } from "../../../domain/repositories/recipe.repositor
 import { Repository } from "typeorm";
 import { RecipeEntity } from "../entities/recipe.entity";
 import { IngredientBuilder } from "../../../domain/builders/ingredient.builder";
+import { StepEntity } from "../entities/step.entity";
 
 export class DatabaseRecipeRepository implements IRecipeRepository {
   constructor(
@@ -16,6 +17,10 @@ export class DatabaseRecipeRepository implements IRecipeRepository {
     const recipeEntities = await this.recipeEntity.find({
       skip: from,
       take: to - from + 1,
+      relations: {
+        steps: true,
+        ingredients: true
+      }
     });
 
     return recipeEntities.map(entity => 
@@ -105,6 +110,8 @@ export class DatabaseRecipeRepository implements IRecipeRepository {
       }
     });
 
+    console.log(recipeEntity);
+
     if (!recipeEntity) {
       throw new Error("Recipe not found");
     }
@@ -133,14 +140,22 @@ export class DatabaseRecipeRepository implements IRecipeRepository {
       name: recipe.getTitle(),
       description: recipe.getDescription(),
       purpose: recipe.getPurpose(),
-      steps: recipe.getSteps().map(step => ({ content: step })),
+      steps: recipe.getSteps().map(stepContent => {
+        const step = new StepEntity();
+        step.content = stepContent;
+        step.recipe = currentRecipe;
+        return step;
+      }),
       ingredients: recipe.getIngredients().map(ingredient => ({
         id: ingredient.getId()
       })),
       ownerId: recipe.getOwnerId()
     });
     const result = await this.recipeEntity.save(currentRecipe);
-    return result !== undefined;
+
+    console.log(result);
+    
+    return result !== null;
   }
 
   async update(recipe: Recipe): Promise<boolean> {

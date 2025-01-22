@@ -45,7 +45,7 @@ export const envs: EnviromentVariable = {
   },
   resend: enviromentVariable.RESEND_API_KEY,
   cloudStorage: {
-    credential: path.join(__dirname, '../../../../', enviromentVariable.GCP_CLOUD_STORAGE_CREDENTIAL),
+    credential: path.join(__dirname, '../../../', enviromentVariable.GCP_CLOUD_STORAGE_CREDENTIAL),
     bucket: enviromentVariable.GCP_CLOUD_STORAGE_BUCKET
   },
   huggingface: enviromentVariable.HUGGINGFACE_API_KEY

@@ -12,7 +12,7 @@ userRoutes.post(
   (req, res) => controller.createUser(req, res)
 );
 
-// GET api/users/:id
+// GET api/users/
 userRoutes.get(
   '/',
   useAuthorization,
@@ -28,9 +28,9 @@ userRoutes.put(
 
 // DELETE api/users/:id
 userRoutes.delete(
-  '/:id',
+  '/',
   useAuthorization,
-  (req, res) => controller.deleteUser(req, res)
+  (req: UserRequest, res) => controller.deleteUser(req, res)
 );
 
 export default userRoutes;

@@ -6,6 +6,5 @@ export const recipeDto = z.object({
   description: z.string().optional(),
   purpose: z.string().optional(),
   steps: z.array(z.string()).optional(),
-  ingredients: z.array(z.number()).optional(),
-  ownerId: z.string().uuid(),
+  ingredients: z.array(z.number()).optional()
 });

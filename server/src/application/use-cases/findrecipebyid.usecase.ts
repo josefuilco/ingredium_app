@@ -28,6 +28,7 @@ export class FindRecipeByIdUseCase {
       id: recipe.getId(),
       title: recipe.getTitle(),
       description: recipe.getDescription(),
+      purpose: recipe.getPurpose(),
       steps: recipe.getSteps(),
       ingredients: recipe.getIngredients(),
       urlImage: imageUrl,

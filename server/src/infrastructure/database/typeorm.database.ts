@@ -3,7 +3,7 @@ import path from 'path';
 import { envs } from '../config/env.config';
 
 const { mysql } = envs;
-const entitiesDir = path.join(__dirname, '../../../**/infrastructure/persistence/entities/*.entity.{js,ts}');
+const entitiesDir = path.join(__dirname, '../../**/infrastructure/persistence/entities/*.entity.{js,ts}');
 
 export const IngrediumDataSource = new DataSource({
   type: 'mysql',
@@ -14,7 +14,7 @@ export const IngrediumDataSource = new DataSource({
   database: mysql.database,
   entities: [entitiesDir],
   synchronize: mysql.development,
-  logging: mysql.development
+  logging: false
 });
 
 IngrediumDataSource.initialize()

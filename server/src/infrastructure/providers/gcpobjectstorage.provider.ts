@@ -14,15 +14,20 @@ export class GCPObjectStorageProvider implements IObjectStorageProvider {
   }
 
   async uploadFile(file: Buffer, key: string): Promise<string> {
-    const fileUpload = this.bucket.file(key);
+    try {
+      const fileUpload = this.bucket.file(key);
 
-    await fileUpload.save(file, {
-      metadata: {
-        contentType: 'application/octet-stream'
-      },
-    });
+      await fileUpload.save(file, {
+        metadata: {
+          contentType: 'application/octet-stream'
+        },
+      });
 
-    return this.getFileUrl(key);
+      return this.getFileUrl(key);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      throw error;
+    }
   }
 
   async getFileUrl(key: string): Promise<string> {
