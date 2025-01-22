@@ -13,8 +13,8 @@ const CommunityPage: React.FC = () => {
     const fetchRecipes = async () => {
       try {
         const recipes = await recipeServices.getRecipesByRange(0, 10);
-        console.log('Recipes:', recipes);
-        setRecipes(recipes);
+        console.log('Recipes:', recipes.data);
+        setRecipes(recipes.data);
       } catch (error) {
         console.error('Error fetching recipes:', error);
       }

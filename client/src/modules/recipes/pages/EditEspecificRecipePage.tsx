@@ -35,7 +35,7 @@ const EditEspecificRecipePage: React.FC = () => {
   const loadRecipe = async () => {
     if (id) {
       try {
-        const recipeData = await recipeServices.getRecipeById(id);
+        const { data: recipeData } = await recipeServices.getRecipeById(id);
         if (recipeData) {
           setRecipe(recipeData);
           setTitle(recipeData.title);
@@ -56,6 +56,7 @@ const EditEspecificRecipePage: React.FC = () => {
   const loadIngredients = async () => {
     try {
       const ingredients = await ingredientServices.getAllIngredients();
+      console.log(ingredients);
       setAvailableIngredients(ingredients);
     } catch (error) {
       console.error('Error loading ingredients:', error);

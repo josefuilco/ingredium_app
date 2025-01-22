@@ -17,7 +17,8 @@ const RecipesPage: React.FC = () => {
 
   const loadRecipes = async () => {
     const userRecipes = await recipeServices.getMyRecipes();
-    setRecipes(userRecipes);
+    console.log('User recipes:', userRecipes.data);
+    setRecipes(userRecipes.data);
   };
 
   const handleAddRecipe = () => {

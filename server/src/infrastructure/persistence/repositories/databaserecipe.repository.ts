@@ -4,7 +4,6 @@ import { IRecipeRepository } from "../../../domain/repositories/recipe.repositor
 import { Repository } from "typeorm";
 import { RecipeEntity } from "../entities/recipe.entity";
 import { IngredientBuilder } from "../../../domain/builders/ingredient.builder";
-import { StepEntity } from "../entities/step.entity";
 
 export class DatabaseRecipeRepository implements IRecipeRepository {
   constructor(
@@ -140,21 +139,16 @@ export class DatabaseRecipeRepository implements IRecipeRepository {
       name: recipe.getTitle(),
       description: recipe.getDescription(),
       purpose: recipe.getPurpose(),
-      steps: recipe.getSteps().map(stepContent => {
-        const step = new StepEntity();
-        step.content = stepContent;
-        step.recipe = currentRecipe;
-        return step;
-      }),
+      steps: recipe.getSteps().map(stepContent => ({
+        content: stepContent,
+        recipe: { id: recipe.getId() }
+      })),
       ingredients: recipe.getIngredients().map(ingredient => ({
         id: ingredient.getId()
       })),
       ownerId: recipe.getOwnerId()
     });
     const result = await this.recipeEntity.save(currentRecipe);
-
-    console.log(result);
-    
     return result !== null;
   }
 

@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Recipe } from '../models/Recipe';
 import { RecipeServices } from '../services/RecipeServices';
 import Navbar from '../../shared/components/Navbar';
-import { Button } from 'primereact/button';
-import { ConfirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 
-const EspecificRecipePage: React.FC = () => {
+const VerRecipeAjenaPage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { recipeId } = useParams();
   const recipeServices = new RecipeServices();
   const toast = React.useRef<Toast>(null);
 
@@ -21,11 +17,10 @@ const EspecificRecipePage: React.FC = () => {
   }, []);
 
   const loadRecipe = async () => {
-    if (id) {
+    if (recipeId) {
       try {
-        const recipeData = await recipeServices.getRecipeById(id);
-        console.log('Recipe data:', recipeData.data);
-        setRecipe(recipeData.data);
+        const { data: recipeData} = await recipeServices.getRecipeById(recipeId);
+        setRecipe(recipeData);
       } catch (error) {
         console.error('Error loading recipe:', error);
         toast.current?.show({
@@ -36,25 +31,6 @@ const EspecificRecipePage: React.FC = () => {
       } finally {
         setLoading(false);
       }
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      await recipeServices.deleteRecipe(id!);
-      toast.current?.show({
-        severity: 'success',
-        summary: 'Éxito',
-        detail: 'Receta eliminada correctamente'
-      });
-      navigate('/recipes');
-    } catch (error) {
-      console.error('Error deleting recipe:', error);
-      toast.current?.show({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'No se pudo eliminar la receta'
-      });
     }
   };
 
@@ -85,35 +61,8 @@ const EspecificRecipePage: React.FC = () => {
     <>
       <Navbar />
       <Toast ref={toast} />
-      <ConfirmDialog
-        visible={showDeleteDialog}
-        onHide={() => setShowDeleteDialog(false)}
-        message="¿Estás seguro de que quieres eliminar esta receta?"
-        header="Confirmar eliminación"
-        icon="pi pi-exclamation-triangle"
-        accept={handleDelete}
-        reject={() => setShowDeleteDialog(false)}
-        acceptLabel="Sí, eliminar"
-        rejectLabel="No, cancelar"
-      />
       <div className="min-h-screen bg-[#fafafa] py-8">
         <div className="max-w-5xl mx-auto px-4">
-          {/* Header Actions */}
-          <div className="flex justify-end gap-4 mb-6">
-            <Button
-              label="Editar"
-              icon="pi pi-pencil"
-              className="bg-orange-hover hover:bg-orange-600 border-none"
-              onClick={() => navigate(`/recipes/${recipe.id}/edit`)}
-            />
-            <Button
-              label="Eliminar"
-              icon="pi pi-trash"
-              className="bg-red-500 hover:bg-red-600 border-none"
-              onClick={() => setShowDeleteDialog(true)}
-            />
-          </div>
-
           {/* Header Section */}
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
             <div className="relative h-[500px]">
@@ -200,4 +149,4 @@ const EspecificRecipePage: React.FC = () => {
   );
 };
 
-export default EspecificRecipePage;
+export default VerRecipeAjenaPage;

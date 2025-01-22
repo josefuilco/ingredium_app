@@ -7,6 +7,8 @@ import EspecificRecipePage from '../modules/recipes/pages/EspecificRecipePage';
 import EditEspecificRecipePage from '../modules/recipes/pages/EditEspecificRecipePage';
 import NewRecipePage from '../modules/recipes/pages/NewRecipePage';
 import NewIngredientPage from '../modules/recipes/pages/NewIngredientPage';
+import VerRecipeAjenaPage from '../modules/recipes/pages/VerRecipeAjenaPage';
+import ProfilePage from '../modules/recipes/pages/ProfilePage';
 
 export const Router = createBrowserRouter([
   {
@@ -23,7 +25,7 @@ export const Router = createBrowserRouter([
   },
   {
     path: '/community/:userId/:recipeId',
-    element: <CommunityPage />
+    element: <VerRecipeAjenaPage />
   },
   {
     path: '/recipes/',
@@ -45,5 +47,8 @@ export const Router = createBrowserRouter([
     path: '/ingredients/new',
     element: <NewIngredientPage />
   },
-  
+  {
+    path: '/profile',
+    element: <ProfilePage />
+  }
 ]);
